@@ -21,7 +21,6 @@ services:
       - app-network
     depends_on:
       - mysql
-      - redis
 
   # Serviço do front-end (Vue.js)
   frontend:
@@ -62,7 +61,7 @@ services:
   # Banco de dados MySQL
   mysql:
     image: mysql:8.0
-    container_name: mysql
+    container_name: mysql_onfly
     restart: unless-stopped
     environment:
       - MYSQL_DATABASE=${DB_DATABASE}
@@ -70,7 +69,7 @@ services:
       - MYSQL_PASSWORD=${DB_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
     volumes:
-      - ./docker/mysql:/var/lib/mysql
+      - ./mysql:/var/lib/mysql
     ports:
       - "3306:3306"
     networks:
