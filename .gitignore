@@ -1,0 +1,4 @@
+.history
+/mysql
+/docker/mysql
+.env
