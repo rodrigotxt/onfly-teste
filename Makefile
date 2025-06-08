@@ -5,6 +5,9 @@ PROJECT_NAME := travel-orders
 BACKEND_CONTAINER := app
 FRONTEND_CONTAINER := frontend
 DB_CONTAINER := mysql
+DB_USERNAME := laravel_user
+DB_PASSWORD := secret123
+DB_DATABASE := travel_orders
 
 # Cores para saída no terminal
 RED=\033[0;31m
@@ -59,8 +62,8 @@ sh-backend: ## Acessa o shell do container do back-end
 sh-frontend: ## Acessa o shell do container do front-end
 	@docker-compose exec $(FRONTEND_CONTAINER) sh
 
-sh-db: ## Acessa o shell do container do banco de dados
-	@docker-compose exec $(DB_CONTAINER) mysql -u$$DB_USERNAME -p$$DB_PASSWORD $$DB_DATABASE
+sh-db: ## Acessa o shell do container do banco de dados	
+	@docker-compose exec $(DB_CONTAINER) mysql -u $(DB_USERNAME) -p$(DB_PASSWORD) $(DB_DATABASE)
 
 ps: ## Lista os containers do projeto
 	@echo "$(YELLOW)Containers do projeto $(PROJECT_NAME):$(NC)"
@@ -92,9 +95,9 @@ install-backend: ## Instala as dependências do back-end (composer)
 	@echo "$(GREEN)Instalando dependências do back-end...$(NC)"
 	@docker-compose exec $(BACKEND_CONTAINER) composer install
 
-install-frontend: ## Instala as dependências do front-end (npm)
-	@echo "$(GREEN)Instalando dependências do front-end...$(NC)"
-	@docker-compose exec $(FRONTEND_CONTAINER) npm install
+#install-frontend: ## Instala as dependências do front-end (npm)
+#	@echo "$(GREEN)Instalando dependências do front-end...$(NC)"
+#	@docker-compose exec $(FRONTEND_CONTAINER) npm install
 
 test-backend: ## Executa os testes do back-end
 	@echo "$(GREEN)Executando testes do back-end...$(NC)"
@@ -105,7 +108,7 @@ test-frontend: ## Executa os testes do front-end
 	@docker-compose exec $(FRONTEND_CONTAINER) npm run test
 
 # Comando para inicialização completa do projeto
-init: build up install-backend install-frontend migrate seed ## Inicialização completa do projeto (build + up + instala dependências + migrações)
+init: build up install-backend migrate seed ## Inicialização completa do projeto (build + up + instala dependências + migrações)
 	@echo "$(GREEN)Projeto inicializado com sucesso!$(NC)"
 	@echo "$(YELLOW)Backend: http://backend.local$(NC)"
 	@echo "$(YELLOW)Frontend: http://frontend.local:8080$(NC)"
