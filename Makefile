@@ -24,6 +24,7 @@ help: ## Exibe esta ajuda
 
 up: ## Inicia os containers em modo detached (background)
 	@echo "$(GREEN)Iniciando containers...$(NC)"
+	@cp .env.example .env	
 	@docker-compose up -d
 	@echo "$(GREEN)Containers iniciados:$(NC)"
 	@make ps
@@ -33,6 +34,7 @@ down: ## Para e remove os containers
 	@docker-compose down
 
 build: ## Constrói/reconstrói os containers
+	@cp .env.example .env	
 	@echo "$(GREEN)Construindo containers...$(NC)"
 	@docker-compose build
 	@echo "$(GREEN)Containers construídos. Execute 'make up' para iniciá-los.$(NC)"
