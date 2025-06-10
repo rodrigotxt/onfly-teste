@@ -31,7 +31,6 @@ services:
     restart: unless-stopped
     ports:
       - "8080:8080"
-      - "9000:9000"
     volumes:
       - ./frontend:/app
       - /app/node_modules
@@ -39,10 +38,6 @@ services:
       - app-network
     environment:
       - VUE_APP_API_URL=http://backend.local
-      - NODE_ENV=development
-      - CHOKIDAR_USEPOLLING=true # Importante para hot-reload no Docker
-    stdin_open: true
-    tty: true
     depends_on:
       - app
 
