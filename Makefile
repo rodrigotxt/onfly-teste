@@ -95,9 +95,9 @@ install-backend: ## Instala as dependências do back-end (composer)
 	@echo "$(GREEN)Instalando dependências do back-end...$(NC)"
 	@docker-compose exec $(BACKEND_CONTAINER) composer install
 
-#install-frontend: ## Instala as dependências do front-end (npm)
-#	@echo "$(GREEN)Instalando dependências do front-end...$(NC)"
-#	@docker-compose exec $(FRONTEND_CONTAINER) npm install
+install-frontend: ## Instala as dependências do front-end (npm)
+	@echo "$(GREEN)Instalando dependências do front-end...$(NC)"
+	@docker-compose exec $(FRONTEND_CONTAINER) npm install
 
 test-backend: ## Executa os testes do back-end
 	@echo "$(GREEN)Executando testes do back-end...$(NC)"
