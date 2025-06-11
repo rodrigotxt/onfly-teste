@@ -115,7 +115,7 @@ test-frontend: ## Executa os testes do front-end
 	@docker-compose exec $(FRONTEND_CONTAINER) npm run test
 
 # Comando para inicialização completa do projeto
-init: clone-submodules build up install-backend migrate seed ## Inicialização completa do projeto (build + up + instala dependências + migrações)
+init: update-submodules build up install-backend migrate seed ## Inicialização completa do projeto (build + up + instala dependências + migrações)
 	@echo "$(GREEN)Projeto inicializado com sucesso!$(NC)"
 	@echo "$(YELLOW)Backend: http://localhost:80$(NC)"
 	@echo "$(YELLOW)Frontend: http://localhost:9000$(NC)"

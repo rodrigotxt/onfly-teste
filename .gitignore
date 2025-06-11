@@ -2,3 +2,5 @@
 /mysql
 /docker/mysql
 .env
+backend
+frontend
