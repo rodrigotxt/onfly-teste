@@ -29,52 +29,52 @@ update-submodules: ## Clona os repositórios de submódulos
 up: ## Inicia os containers em modo detached (background)
 	@echo "$(GREEN)Iniciando containers...$(NC)"
 	@cp .env.example .env
-	@docker-compose up -d
+	@docker compose up -d
 	@echo "$(GREEN)Containers iniciados:$(NC)"
 	@make ps
 
 down: ## Para e remove os containers
 	@echo "$(YELLOW)Parando e removendo containers...$(NC)"
-	@docker-compose down
+	@docker compose down
 
 build: ## Constrói/reconstrói os containers
 	@echo "$(GREEN)Construindo containers...$(NC)"
 	@cp .env.example .env
 	@cp ./frontend/.env.example ./frontend/.env
-	@COMPOSE_HTTP_TIMEOUT=300 docker-compose build
+	@COMPOSE_HTTP_TIMEOUT=300 docker compose build
 	@echo "$(GREEN)Containers construídos. Execute 'make up' para iniciá-los.$(NC)"
 
 rebuild: down build up ## Reconstroi os containers completamente (down + build + up)
 
 start: ## Inicia os containers já construídos
-	@docker-compose start
+	@docker compose start
 
 stop: ## Para os containers sem removê-los
-	@docker-compose stop
+	@docker compose stop
 
 restart: stop start ## Reinicia os containers
 
 logs: ## Mostra os logs de todos os containers
-	@docker-compose logs -f
+	@docker compose logs -f
 
 logs-backend: ## Mostra os logs do back-end
-	@docker-compose logs -f $(BACKEND_CONTAINER)
+	@docker compose logs -f $(BACKEND_CONTAINER)
 
 logs-frontend: ## Mostra os logs do front-end
-	@docker-compose logs -f $(FRONTEND_CONTAINER)
+	@docker compose logs -f $(FRONTEND_CONTAINER)
 
 sh-backend: ## Acessa o shell do container do back-end
-	@docker-compose exec $(BACKEND_CONTAINER) sh
+	@docker compose exec $(BACKEND_CONTAINER) sh
 
 sh-frontend: ## Acessa o shell do container do front-end
-	@docker-compose exec $(FRONTEND_CONTAINER) sh
+	@docker compose exec $(FRONTEND_CONTAINER) sh
 
 sh-db: ## Acessa o shell do container do banco de dados	
-	@docker-compose exec $(DB_CONTAINER) mysql -u $(DB_USERNAME) -p$(DB_PASSWORD) $(DB_DATABASE)
+	@docker compose exec $(DB_CONTAINER) mysql -u $(DB_USERNAME) -p$(DB_PASSWORD) $(DB_DATABASE)
 
 ps: ## Lista os containers do projeto
 	@echo "$(YELLOW)Containers do projeto $(PROJECT_NAME):$(NC)"
-	@docker-compose ps
+	@docker compose ps
 
 status: ps ## Alias para ps
 
@@ -88,32 +88,32 @@ clean-all: ## Remove TUDO (containers, imagens, networks, volumes) - CUIDADO!
 
 migrate: ## Executa as migrações do Laravel
 	@echo "$(GREEN)Executando migrações...$(NC)"
-	@docker-compose exec $(BACKEND_CONTAINER) php artisan migrate
+	@docker compose exec $(BACKEND_CONTAINER) php artisan migrate
 
 fresh: ## Recria o banco de dados (drop + migrate)
 	@echo "$(RED)Recriando o banco de dados...$(NC)"
-	@docker-compose exec $(BACKEND_CONTAINER) php artisan migrate:fresh
+	@docker compose exec $(BACKEND_CONTAINER) php artisan migrate:fresh
 
 seed: ## Executa os seeders do banco de dados
 	@echo "$(GREEN)Populando o banco de dados...$(NC)"
-	@docker-compose exec $(BACKEND_CONTAINER) php artisan db:seed
+	@docker compose exec $(BACKEND_CONTAINER) php artisan db:seed
 
 install-backend: ## Instala as dependências do back-end (composer)
 	@echo "$(GREEN)Instalando dependências do back-end...$(NC)"
 	@cp ./backend/.env.example ./backend/.env
-	@docker-compose exec $(BACKEND_CONTAINER) composer install
+	@docker compose exec $(BACKEND_CONTAINER) composer install
 
 install-frontend: ## Instala as dependências do front-end (npm)
 	@echo "$(GREEN)Instalando dependências do front-end...$(NC)"
-	@docker-compose exec $(FRONTEND_CONTAINER) npm install
+	@docker compose exec $(FRONTEND_CONTAINER) npm install
 
 test-backend: ## Executa os testes do back-end
 	@echo "$(GREEN)Executando testes do back-end...$(NC)"
-	@docker-compose exec $(BACKEND_CONTAINER) php artisan test
+	@docker compose exec $(BACKEND_CONTAINER) php artisan test
 
 test-frontend: ## Executa os testes do front-end
 	@echo "$(GREEN)Executando testes do front-end...$(NC)"
-	@docker-compose exec $(FRONTEND_CONTAINER) npm run test
+	@docker compose exec $(FRONTEND_CONTAINER) npm run test
 
 # Comando para inicialização completa do projeto
 init: update-submodules build up install-backend migrate seed ## Inicialização completa do projeto (build + up + instala dependências + migrações)
