@@ -117,5 +117,5 @@ test-frontend: ## Executa os testes do front-end
 # Comando para inicialização completa do projeto
 init: clone-submodules build up install-backend migrate seed ## Inicialização completa do projeto (build + up + instala dependências + migrações)
 	@echo "$(GREEN)Projeto inicializado com sucesso!$(NC)"
-	@echo "$(YELLOW)Backend: http://backend.local$(NC)"
-	@echo "$(YELLOW)Frontend: http://frontend.local:8080$(NC)"
+	@echo "$(YELLOW)Backend: http://localhost:80$(NC)"
+	@echo "$(YELLOW)Frontend: http://localhost:9000$(NC)"
