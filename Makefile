@@ -22,7 +22,7 @@ NC=\033[0m # No Color
 help: ## Exibe esta ajuda
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-clone-submodules: ## Clona os repositórios de submódulos
+update-submodules: ## Clona os repositórios de submódulos
 	@echo "$(GREEN)Clonando repositórios de submódulos...$(NC)"
 	@git submodule update --init --recursive --remote
 
