@@ -63,7 +63,7 @@ Certifique-se de ter os seguintes softwares instalados em sua máquina:
 ### Configuração Inicial
 
 1. **Clone o repositório: `git clone https://github.com/rodrigotxt/onfly-teste.git`**
-2. **Inicialize o ambiente com Docker Compose: `make init`**
+2. **Inicialize o ambiente com Docker Compose: `make init`, em caso de erro execute com `sudo make init`**
    
 Este comando irá clonar os submódulos (backend, frontend), copiar o arquivo de ambiente, construir as imagens Docker (se necessário), instalar as dependências do Laravel e do Vue.js, e levantar os containers.
 Também irá instalar todas dependências do fronten e backend, além de rodar migrations e seeders iniciais.
