@@ -15,12 +15,16 @@ GREEN=\033[0;32m
 YELLOW=\033[0;33m
 NC=\033[0m # No Color
 
-.PHONY: help up down build rebuild start stop restart logs logs-backend logs-frontend \
+.PHONY: clone-submodules help up down build rebuild start stop restart logs logs-backend logs-frontend \
 		sh-backend sh-frontend sh-db ps status clean clean-all migrate fresh seed \
 		install-backend install-frontend test-backend test-frontend
 
 help: ## Exibe esta ajuda
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+
+clone-submodules: ## Clona os repositórios de submódulos
+	@echo "$(GREEN)Clonando repositórios de submódulos...$(NC)"
+	@git submodule update --init --recursive --remote
 
 up: ## Inicia os containers em modo detached (background)
 	@echo "$(GREEN)Iniciando containers...$(NC)"
@@ -110,7 +114,7 @@ test-frontend: ## Executa os testes do front-end
 	@docker-compose exec $(FRONTEND_CONTAINER) npm run test
 
 # Comando para inicialização completa do projeto
-init: build up install-backend migrate seed ## Inicialização completa do projeto (build + up + instala dependências + migrações)
+init: clone-submodules build up install-backend migrate seed ## Inicialização completa do projeto (build + up + instala dependências + migrações)
 	@echo "$(GREEN)Projeto inicializado com sucesso!$(NC)"
 	@echo "$(YELLOW)Backend: http://backend.local$(NC)"
 	@echo "$(YELLOW)Frontend: http://frontend.local:8080$(NC)"
