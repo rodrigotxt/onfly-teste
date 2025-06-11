@@ -40,6 +40,7 @@ down: ## Para e remove os containers
 build: ## Constrói/reconstrói os containers
 	@echo "$(GREEN)Construindo containers...$(NC)"
 	@cp .env.example .env
+	@cp ./frontend/.env.example ./frontend/.env
 	@COMPOSE_HTTP_TIMEOUT=300 docker-compose build
 	@echo "$(GREEN)Containers construídos. Execute 'make up' para iniciá-los.$(NC)"
 
