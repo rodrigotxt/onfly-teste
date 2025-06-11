@@ -1,6 +1,8 @@
 [submodule "frontend"]
 	path = frontend
 	url = https://github.com/rodrigotxt/onfly-fullstack-frontend.git
+	branch = main
 [submodule "backend"]
 	path = backend
 	url = https://github.com/rodrigotxt/onfly-fullstack-backend.git
+	branch = main
