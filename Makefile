@@ -99,6 +99,7 @@ seed: ## Executa os seeders do banco de dados
 
 install-backend: ## Instala as dependências do back-end (composer)
 	@echo "$(GREEN)Instalando dependências do back-end...$(NC)"
+	@cp ./backend/.env.example ./backend/.env
 	@docker-compose exec $(BACKEND_CONTAINER) composer install
 
 install-frontend: ## Instala as dependências do front-end (npm)
