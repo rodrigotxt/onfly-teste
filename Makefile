@@ -28,7 +28,7 @@ update-submodules: ## Clona os repositórios de submódulos
 
 up: ## Inicia os containers em modo detached (background)
 	@echo "$(GREEN)Iniciando containers...$(NC)"
-	@cp .env.example .env
+	@cp .env.example .env -n
 	@docker compose up -d
 	@echo "$(GREEN)Containers iniciados:$(NC)"
 	@make ps
@@ -39,8 +39,8 @@ down: ## Para e remove os containers
 
 build: ## Constrói/reconstrói os containers
 	@echo "$(GREEN)Construindo containers...$(NC)"
-	@cp .env.example .env
-	@cp ./frontend/.env.example ./frontend/.env
+	@cp .env.example .env -n
+	@cp ./frontend/.env.example ./frontend/.env -n
 	@COMPOSE_HTTP_TIMEOUT=300 docker compose build
 	@echo "$(GREEN)Containers construídos. Execute 'make up' para iniciá-los.$(NC)"
 
@@ -100,7 +100,7 @@ seed: ## Executa os seeders do banco de dados
 
 install-backend: ## Instala as dependências do back-end (composer)
 	@echo "$(GREEN)Instalando dependências do back-end...$(NC)"
-	@cp ./backend/.env.example ./backend/.env
+	@cp ./backend/.env.example ./backend/.env -n
 	@docker compose exec $(BACKEND_CONTAINER) composer install
 
 install-frontend: ## Instala as dependências do front-end (npm)
