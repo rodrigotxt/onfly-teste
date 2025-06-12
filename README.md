@@ -1,6 +1,6 @@
 # Projeto de Pedido de Viagem
 
-Este projeto é uma aplicação web completa para gerenciamento de pedidos de viagem, composta por um backend robusto em **Laravel** e um frontend interativo construído com **Vue.js (Quasar Framework)**. O objetivo é fornecer uma solução limpa, escalável e segura para que usuários autenticados possam criar, visualizar e gerenciar suas próprias ordens de viagem.
+Este projeto é uma aplicação web para gerenciamento de pedidos de viagem, composta por um backend em **Laravel** e um frontend interativo construído com **Vue.js (Quasar Framework)**. O objetivo é fornecer uma solução limpa, escalável e segura para que usuários autenticados possam criar, visualizar e gerenciar suas próprias ordens de viagem.
 
 ## Sumário
 
